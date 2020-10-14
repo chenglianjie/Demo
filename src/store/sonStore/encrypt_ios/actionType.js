@@ -1,0 +1,7 @@
+const ENCRYPTDETAILSTATE = 'ENCRYPTDETAILSTATE';//  点击详情 进入不同的状态界面
+
+
+
+export {
+  ENCRYPTDETAILSTATE,
+};
