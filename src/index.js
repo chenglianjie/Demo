@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {BrowserRouter,HashRouter} from "react-router-dom";
-
+import "./common/style/common.less";
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
   <BrowserRouter>
