@@ -4,10 +4,13 @@ import Login from "./modules/login"
 import Home from "./modules/home"
 import "./app.less"
 function App() {
+  let needLogin =  window.localStorage.getItem("kiwiCert")
   return (
       <Switch>
         <Route exact path='/login' component={Login}/>
-        <Route exact path='/' component={Home}/>
+        { 
+          needLogin ? <Route path="/" component={Login} /> : <Route path="/" component={Home} />
+        }
         <Route  component={Home}/>
       </Switch>
   );
