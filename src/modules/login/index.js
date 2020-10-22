@@ -18,9 +18,10 @@ class Logins extends React.Component{
       <Fragment>
         <div className="container">
           <div className="loginBox">
-            <div class="userImage">
+            <div className="userImage">
               <img alt ="" src="/img/catFace.png"/>
             </div>
+            {/* 1 是登录界面 2是注册界面 3 是忘记密码界面 */}
             {flag===1?<Login changeFlag = {this.changeFlag} />:null}
             {flag===2?<Rigister changeFlag = {this.changeFlag} />:null}
             {flag===3?<ForgetPassword changeFlag = {this.changeFlag} />:null}

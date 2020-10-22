@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Icon, Input, Button, } from 'antd';
+import { Form, Icon, Input, Button,message } from 'antd';
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 16 },
@@ -13,6 +13,10 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        let loginValue = `${values.username}`;
+        message.success("登录成功");
+        localStorage.setItem("kiwiCert",loginValue);
+        window.location.pathname = "/Latout/andriodtest";
       }
     });
   };

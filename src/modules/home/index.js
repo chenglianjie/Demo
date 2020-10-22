@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route,Link,Switch} from 'react-router-dom';
-import { Layout,Menu} from "antd";
+import { Layout,Menu, message} from "antd";
 // 六大模块
 import Andriodtest from "../detection_andriod";
 import Iosencrypt from "../encrypt_ios";
@@ -43,8 +43,16 @@ class Home extends React.Component {
     openKeys:[openKeys],
   })
 }
+// 退出登录
+exit = () => {
+  message.success("退出成功");
+  window.localStorage.removeItem('kiwiCert');
+  window.location.href="/login";
+}
   render () {
-    const { selectedKeys,openKeys }=this.state;
+    const { selectedKeys }=this.state;
+    // 判断是否登录
+    let islogin =  window.localStorage.getItem('kiwiCert');
     if(!selectedKeys){
       return <div></div>
     }
@@ -52,8 +60,9 @@ class Home extends React.Component {
       <div className="layoutComponent">
         <Layout>
           {/* 头部 */}
-          <Header className="header"  style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+          <Header className="header"  style={{ position: 'fixed', zIndex: 1, width: '100%',display:"flex",justifyContent:'space-between'}}>
             <div style={{color:'white'}}>几维盾牌</div>
+           <div className="headtitle">欢迎 {islogin}<span className="headtitle" onClick={this.exit}>退出</span></div>
           </Header>
           <Layout>
             {/* 侧边栏 */}
@@ -112,5 +121,4 @@ class Home extends React.Component {
     )
   }
 }
-
 export default Home
