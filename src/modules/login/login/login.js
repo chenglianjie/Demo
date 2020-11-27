@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, Icon, Input, Button,message } from 'antd';
+import axios from '@/utils/request';
+import {get} from "lodash";
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 16 },
@@ -10,13 +12,33 @@ const tailLayout = {
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        const passwordRegExp= /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/
+        // 邮箱校验正则
+        const emailRegExp = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+        // 手机号码正则校验
+        const phoneRegExp =  /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+        if(!phoneRegExp.test(values.username) && !emailRegExp.test(values.username)) {
+            message.error("用户名格式错误，必须是手机号或邮箱");
+            return;
+        }
         let loginValue = `${values.username}`;
-        message.success("登录成功");
-        localStorage.setItem("kiwiCert",loginValue);
-        window.location.pathname = "/Latout/andriodtest";
+        await axios.post("/kiwisec/login",values).then((res)=>{
+          console.log("res",res.data);
+          const token = get(res,"data.data",'');
+          if(res.data.code === 1){
+            localStorage.setItem("kiwi",JSON.stringify(token));
+            message.success("登录成功");
+            window.location.pathname = "/Latout/andriodtest";
+          }else{
+            message.error("登录失败")
+          }
+        }).catch((err)=>{
+          console.error(err);
+        });
+       
       }
     });
   };
@@ -36,7 +58,9 @@ class NormalLoginForm extends React.Component {
         </Form.Item>
         <Form.Item label="密码" >
           {getFieldDecorator('password', {
-            rules: [{ required: true, message: '请输入密码！' }],
+            rules: [{ required: true, message: '密码必须大于6位，且有数字和字母组成',
+            pattern:/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/,
+          }],
           })(
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}

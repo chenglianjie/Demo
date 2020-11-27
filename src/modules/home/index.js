@@ -36,23 +36,27 @@ class Home extends React.Component {
   if(pathname==="/"){
     pathname="/Latout/andriodtest"
   }
-  const selectedKeys= menu_list.filter(item=>item.routerPath===pathname)[0].key
-  const openKeys= menu_list.filter(item=>item.routerPath===pathname)[0].parentKey
-  this.setState({
-    selectedKeys:selectedKeys,
-    openKeys:[openKeys],
-  })
+  try {
+    const selectedKeys= menu_list.filter(item=>item.routerPath===pathname)[0].key
+    const openKeys= menu_list.filter(item=>item.routerPath===pathname)[0].parentKey
+    this.setState({
+      selectedKeys:selectedKeys,
+      openKeys:[openKeys],
+    })
+  } catch (error) {
+    
+  }
 }
 // 退出登录
 exit = () => {
   message.success("退出成功");
-  window.localStorage.removeItem('kiwiCert');
+  window.localStorage.removeItem('kiwi');
   window.location.href="/login";
 }
   render () {
     const { selectedKeys }=this.state;
     // 判断是否登录
-    let islogin =  window.localStorage.getItem('kiwiCert');
+    let islogin =  window.localStorage.getItem('kiwi');
     if(!selectedKeys){
       return <div></div>
     }
@@ -104,13 +108,13 @@ exit = () => {
                style={{ padding:24, marginTop: 64,marginLeft:200,backgroundColor:'#fff' }}
               >
                 <Switch>
-                   <Route exact path="/" component={Iosencrypt}/>
-                   <Route exact path="/Latout/andriodtest" component={Andriodtest}/>
+                   <Route path="/Latout/andriodtest" component={Andriodtest}/>
                    <Route exact path="/Latout/iostest" component={Iostest}/>
                    <Route exact path="/Latout/andriodencrypt" component={Andriodencrypt}/>
                    <Route exact path="/Latout/iosencrypt" component={Iosencrypt}/>
                    <Route exact path="/Latout/userlist" component={Userlist}/>
                    <Route exact path="/Latout/loginrecord" component={Loginrecord}/>
+                   <Route exact path="/" component={Iosencrypt}/>
                 </Switch>
               </Content>
             </Layout>

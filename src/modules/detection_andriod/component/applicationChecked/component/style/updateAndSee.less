@@ -1,0 +1,92 @@
+.see-modal{
+  // 多选框 样式变成小圆圈
+  .ant-checkbox-inner{
+    border-radius:12px
+  }
+  .Systemalbum{
+    height:300px;
+    .title{
+      margin:10px;
+    }
+    .time{
+      padding-left: 20px;
+      font-size:14px;
+      font-weight: bold;
+    }
+  }
+  .title{
+    text-align: center;
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:20px;
+  }
+  .title2{
+    text-align: center;
+    width:102px;
+    min-width:102px;
+    height:102px;
+    line-height:102px;
+    font-size:16px;
+  }
+  .localimgbox{
+    display: flex;
+    flex-wrap: wrap;
+    line-height:40px;
+    // border:1px solid yellow;
+  }
+  .localimg{
+   margin-bottom: 10px;
+    img{
+      width:104px;
+      height:104px;
+    }
+    margin-right:20px;
+    div:first-child{
+      position: relative;
+      width:104px;
+      height:104px;
+      text-align: center;
+    }
+    div:first-child:hover{
+      .action{
+        opacity:1
+      }
+      .mark{
+        background-color: rgba(0,0,0,.4);
+      }
+    }
+    .mark{
+      display: inline-block;
+      width:104px;
+      height:104px;
+      position: absolute;
+      left:0;
+      top:0;
+      // z-index: -33;
+      // background-color: rgba(0,0,0,0.1);
+    }
+    .action{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 10;
+      white-space: nowrap;
+      -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      opacity: 0;
+      -webkit-transition: all .3s;
+      transition: all .3s;
+    }
+  }
+  .no-log{
+    position: relative;   
+    top:30px;
+    font-size:14px;
+    font-weight:300;
+    color:#999999;
+  }
+  .no-log2{
+    top:39px
+  }
+}

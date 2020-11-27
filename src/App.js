@@ -5,13 +5,13 @@ import Home from "./modules/home"
 import "./app.less"
 function App() {
   // 判断 是否登录
-  let needLogin =  !!window.localStorage.getItem("kiwiCert")
-  console.log("needLogin",needLogin)
+  let isLogin = window.localStorage.getItem("kiwi")?true:false;
+  console.log("needLogin",isLogin)
   return (
       <Switch>
         <Route exact path='/login' component={Login}/>
         { 
-          needLogin ? <Route path="/" component={Home} />:<Route path="/" component={Login} /> 
+          isLogin ? <Route path="/" component={Home} />:<Route path="/" component={Login} /> 
         }
         <Route  component={Home}/>
       </Switch>
