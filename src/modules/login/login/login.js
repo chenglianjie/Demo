@@ -15,7 +15,7 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        const passwordRegExp= /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/
+        const passwordRegExp = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/
         // 邮箱校验正则
         const emailRegExp = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
         // 手机号码正则校验
@@ -25,13 +25,16 @@ class NormalLoginForm extends React.Component {
             return;
         }
         let loginValue = `${values.username}`;
-        await axios.post("/kiwisec/login",values).then((res)=>{
+        // await axios.post("/kiwisec/login",values).then((res)=>{
+        await axios.post("http://local388-cloud.kiwisec.com/user/login",{username:'admin@admin.com',password:'a981cf4e58d17d5e78a1e9fbfc3c6665'})
+        .then((res)=>{
           console.log("res",res.data);
           const token = get(res,"data.data",'');
           if(res.data.code === 1){
-            localStorage.setItem("kiwi",JSON.stringify(token));
+            // localStorage.setItem("kiwi",JSON.stringify(token));
+            localStorage.setItem('kiwi', JSON.stringify(res.data))
             message.success("登录成功");
-            window.location.pathname = "/Latout/andriodtest";
+            window.location.pathname = "/Latout/andriodencrypt";
           }else{
             message.error("登录失败")
           }

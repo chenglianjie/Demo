@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { Modal } from 'antd';
-import host from "./host"
+import host from "./host";
 // 是否在开发环境中  默认在开发环境中  
 let isDev = true;
 // 如果在生产环境中 isDev为false   development 开发环境   production 生产环境
@@ -13,14 +13,17 @@ host.map((item)=>{
 }).forEach((item)=>{
  Axios.defaults[item.name] = item.origin
 })
-Axios.defaults.withCredentials= true;  // 默认为false  表示跨域请求时是否需要使用凭证
+Axios.defaults.withCredentials = true;  // 默认为false  表示跨域请求时是否需要使用凭证
 const axios = Axios.create({});
 // 请求拦截器
 axios.interceptors.request.use((request) => {
   try {
     const kiwiCert = localStorage.getItem('kiwi');
-    const token = JSON.parse(kiwiCert);
-    request.headers.Authorization = `Bearer ${token}`;
+    const jsonList = JSON.parse(kiwiCert);
+    request.headers.Authorization = `Bearer ${jsonList.token}`;
+    // const kiwiCert = localStorage.getItem('kiwi');
+    // const token = JSON.parse(kiwiCert);
+    // request.headers.Authorization = `Bearer ${token}`;
   } catch (err) {
     console.error('axios请求拦截出错',err);
   }

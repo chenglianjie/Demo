@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route,Link,Switch} from 'react-router-dom';
-import { Layout,Menu, message} from "antd";
+import { Layout,Menu, message,Icon} from "antd";
 // 六大模块
 import Andriodtest from "../detection_andriod";
 import Iosencrypt from "../encrypt_ios";
@@ -65,8 +65,8 @@ exit = () => {
         <Layout>
           {/* 头部 */}
           <Header className="header"  style={{ position: 'fixed', zIndex: 1, width: '100%',display:"flex",justifyContent:'space-between'}}>
-            <div style={{color:'white'}}>几维盾牌</div>
-           <div className="headtitle">欢迎 {islogin}<span className="headtitle" onClick={this.exit}>退出</span></div>
+            <div className="left-title" >几维盾牌<span className="title-item">移动应用安全管理平台</span></div>
+           <div className="headtitle"><Icon type="user" />超级***<span  className="headtitle" onClick={this.exit}>退出</span></div>
           </Header>
           <Layout>
             {/* 侧边栏 */}
@@ -77,7 +77,7 @@ exit = () => {
                 height: '100vh',
                 position: 'fixed',
                 left: 0,
-                top:50
+                top:60
               }}
             >
               {/* 左边导航菜单 */}
