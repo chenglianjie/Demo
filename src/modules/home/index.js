@@ -33,6 +33,7 @@ class Home extends React.Component {
  componentDidMount(){
   // 获取当前路径
   let pathname = this.props.location.pathname
+  // console.error("pathname",pathname)
   if(pathname==="/"){
     pathname="/Latout/andriodtest"
   }
@@ -65,7 +66,7 @@ exit = () => {
         <Layout>
           {/* 头部 */}
           <Header className="header"  style={{ position: 'fixed', zIndex: 1, width: '100%',display:"flex",justifyContent:'space-between'}}>
-            <div className="left-title" >几维盾牌<span className="title-item">移动应用安全管理平台</span></div>
+            <div className="left-title" style={{color:'white'}} >几维盾牌<span className="title-item">移动应用安全管理平台</span></div>
            <div className="headtitle"><Icon type="user" />超级***<span  className="headtitle" onClick={this.exit}>退出</span></div>
           </Header>
           <Layout>

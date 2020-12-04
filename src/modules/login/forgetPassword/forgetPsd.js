@@ -14,7 +14,7 @@ class ForgetPasswords extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        const passwordRegExp= /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/
+        // const passwordRegExp= /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/
         // 邮箱校验正则
         const emailRegExp = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
         // 手机号码正则校验

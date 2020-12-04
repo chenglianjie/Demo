@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { Modal } from 'antd';
 import host from "./host";
+import {get} from "lodash";
 // 是否在开发环境中  默认在开发环境中  
 let isDev = true;
 // 如果在生产环境中 isDev为false   development 开发环境   production 生产环境
@@ -18,9 +19,10 @@ const axios = Axios.create({});
 // 请求拦截器
 axios.interceptors.request.use((request) => {
   try {
-    const kiwiCert = localStorage.getItem('kiwi');
-    const jsonList = JSON.parse(kiwiCert);
-    request.headers.Authorization = `Bearer ${jsonList.token}`;
+    const kiwi = localStorage.getItem('kiwi');
+    const token = JSON.parse(kiwi);
+    // console.log("token",token);
+    request.headers.Authorization = `Bearer ${token}`;
     // const kiwiCert = localStorage.getItem('kiwi');
     // const token = JSON.parse(kiwiCert);
     // request.headers.Authorization = `Bearer ${token}`;
@@ -33,10 +35,12 @@ axios.interceptors.request.use((request) => {
 axios.interceptors.response.use((response = {}) => { return response;},
   (error) => {
     const { response = {} } = error;
+    // console.log("response33",response)
+    const msg = get(response,'data.msg','请重新登录')
     if (response.status === 401) {
       Modal.warning({
-        title: '身份校验已过期',
-        content: '请重新登录',
+        title: msg,
+        // content: '请重新登录',
         onOk() {
           localStorage.removeItem("kiwiCert");
           window.location.href = '/login';
