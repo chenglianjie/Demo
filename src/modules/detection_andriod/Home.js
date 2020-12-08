@@ -1,12 +1,22 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: Jimmy
+ * @Date: 2020-11-12 14:45:53
+ * @LastEditors: Jimmy
+ * @LastEditTime: 2020-12-08 18:17:03
+ */
 import React from "react";
 import {Cascader,Icon,Table,Button,Modal} from "antd";
 import { Link } from "react-router-dom";
 import { pca, pcaa } from 'area-data';
 import 'react-area-linkage/dist/index.css'; // v2 or higher
 import { AreaSelect, AreaCascader } from 'react-area-linkage';
+import "./home.less"
 // import "./index.less"
 // import Upload from "./upload"
 class Home extends React.Component {
+
   render(){
     const columns = [
       { title: 'Name', dataIndex: 'name', key: 'name' },
@@ -16,6 +26,7 @@ class Home extends React.Component {
         title: 'Action',
         dataIndex: '',
         key: 'x',
+        className:'clj-td',
       render: (text,record,index) => {return <Link to={{
         pathname:"/Latout/andriodtest/about",
         // search:`?page=${index}`,
@@ -47,11 +58,31 @@ class Home extends React.Component {
         description: '',
       },
     ];
+    const expandedRowRender = () =>{
+      const columns = [
+        {title:'性别',key:'哈哈',dataIndex:'a'},
+        {title:'姓名',key:'哈哈2',dataIndex:'b'},
+        {title:'年龄',key:'哈哈3',dataIndex:'c'},
+      ]
+      const data = [
+        {a:'男',b:'张三',c:"20"},
+        {a:'女',b:'小红',c:"22"},
+    ];
+     return <Table columns={columns} dataSource={data} pagination={false} />;
+    }
     return(
       <div style={{height:200}}>
           <Table
            columns = {columns}
            dataSource={data}
+           expandedRowRender={expandedRowRender}
+           expandRowByClick={true}
+          //  rowSelection={{columnWidth:60}}
+          expandIconAsCell = {false}
+          expandIconColumnIndex={3}
+          expandIcon = {(record)=>{
+            return record.expanded ? <Icon type="down"  onClick={record.onExpand}/>:<Icon type="right"  onClick={record.onExpand}/>
+          }}
           >
           </Table>
       </div>    

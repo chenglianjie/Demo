@@ -38,8 +38,14 @@ class Home extends React.Component {
     pathname="/Latout/andriodtest"
   }
   try {
-    const selectedKeys= menu_list.filter(item=>item.routerPath===pathname)[0].key
-    const openKeys= menu_list.filter(item=>item.routerPath===pathname)[0].parentKey
+    const selectedKeys= menu_list.filter((item)=>{
+      let regex = new RegExp(`${item.routerPath}`)
+      return regex.test(pathname)
+    })[0].key
+    const openKeys= menu_list.filter((item)=>{
+      let regex = new RegExp(`${item.routerPath}`)
+      return regex.test(pathname)
+    })[0].parentKey
     this.setState({
       selectedKeys:selectedKeys,
       openKeys:[openKeys],
@@ -106,12 +112,12 @@ exit = () => {
             </Sider>
             <Layout>
               <Content
-               style={{ padding:24, marginTop: 64,marginLeft:200,backgroundColor:'#fff' }}
+               style={{padding:24,marginTop: 64,marginLeft:200,backgroundColor:'#fff' }}
               >
                 <Switch>
                    <Route path="/Latout/andriodtest" component={Andriodtest}/>
                    <Route exact path="/Latout/iostest" component={Iostest}/>
-                   <Route exact path="/Latout/andriodencrypt" component={Andriodencrypt}/>
+                   <Route  path="/Latout/andriodencrypt" component={Andriodencrypt}/>
                    <Route exact path="/Latout/iosencrypt" component={Iosencrypt}/>
                    <Route exact path="/Latout/userlist" component={Userlist}/>
                    <Route exact path="/Latout/loginrecord" component={Loginrecord}/>

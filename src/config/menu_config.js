@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: Jimmy
+ * @Date: 2020-10-13 15:51:44
+ * @LastEditors: Jimmy
+ * @LastEditTime: 2020-12-08 10:09:02
+ */
 const menu_list =[
   // routerPath是路由路径 showComponent 路由对应的组件
   // 安全检测模块
