@@ -4,11 +4,11 @@
  * @Author: Jimmy
  * @Date: 2020-12-08 11:16:10
  * @LastEditors: Jimmy
- * @LastEditTime: 2020-12-08 18:25:37
+ * @LastEditTime: 2020-12-08 18:44:07
  */
 import React, { Component } from 'react';
 import { Result, Button } from 'antd';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
 import "./style/details.less"
 class Details extends Component {
   constructor(props) {

@@ -4,7 +4,7 @@
  * @Author: Jimmy
  * @Date: 2020-11-12 14:45:53
  * @LastEditors: Jimmy
- * @LastEditTime: 2020-12-08 18:17:03
+ * @LastEditTime: 2020-12-09 11:25:11
  */
 import React from "react";
 import {Cascader,Icon,Table,Button,Modal} from "antd";
@@ -77,10 +77,9 @@ class Home extends React.Component {
            dataSource={data}
            expandedRowRender={expandedRowRender}
            expandRowByClick={true}
-          //  rowSelection={{columnWidth:60}}
-          expandIconAsCell = {false}
-          expandIconColumnIndex={3}
-          expandIcon = {(record)=>{
+            expandIconAsCell = {false}
+            expandIconColumnIndex={3}
+            expandIcon = {(record)=>{
             return record.expanded ? <Icon type="down"  onClick={record.onExpand}/>:<Icon type="right"  onClick={record.onExpand}/>
           }}
           >
