@@ -7,6 +7,7 @@ import "./index.less"
 import axios from '@/utils/request';
 import CustomRangePicker from '@/common/CustomRangePicker/index';
 import UploadBar from "@/common/UploadBar/index";
+import {get} from "lodash";
 const { Search } = Input;
 const { confirm } = Modal;
 class EncryptAndriod extends React.Component {
@@ -94,7 +95,16 @@ class EncryptAndriod extends React.Component {
       data = [];
     }
     const columns = [
-      { title: '应用名称', dataIndex: 'apkName', key: 'apkName',align:'center' },
+      { title: '应用名称', dataIndex: 'apkName', key: 'apkName',align:'center',render:(text,record)=>{
+        let day = moment().format("YYYYMMDD");
+        let imgPath = `http://127.0.0.1:3030/img/${day}/${record.apkIcon}`
+        return(
+          <div className="iconAndName">
+            <div><img src={imgPath} alt=''/></div>
+            <div className='apkname'>{text}</div>
+          </div>
+        )
+      }},
       { title: '应用版本', dataIndex: 'version', key: 'version',render:(text,record)=>{
         let version = text || "";
         let index = version.indexOf('(');
@@ -177,7 +187,10 @@ class EncryptAndriod extends React.Component {
           console.log("上传的res", res);
           this.setState({showBar:false,progress:''});
         }).catch((error) => {
-          console.error("上传错误", error)
+          console.error("上传错误", error.response);
+          const msg = get(error,'response.data.msg','上传失败,请检查apk是否完整');
+          message.error(msg)
+          this.setState({showBar:false,progress:''});
         })
         await this.getTableData();
         return false;
@@ -189,10 +202,6 @@ class EncryptAndriod extends React.Component {
           //  支持对安卓应用的APK、JAR、AAR文件进行多项安全加固，包括Java2C加密技术
           title="Android加固"
           content="( 支持对安卓应用的APK文件进行多项安全加固，包括Java2C加密技术 )"
-          txt="开发文档"
-          link="https://doc.kiwisec.com/kiwiApkEncrypt/"
-          isIcon={true}
-          toolTipText="安卓应用加固使用说明"
         />
         <Upload {...props}>
           <Button icon="plus" type="primary" className="button">上传应用（APK）</Button>
