@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: Jimmy
+ * @Date: 2020-11-27 15:43:22
+ * @LastEditors: Jimmy
+ * @LastEditTime: 2020-12-14 18:32:49
+ */
 import Axios from "axios";
 import { Modal } from 'antd';
 import host from "./host";
@@ -8,6 +16,7 @@ let isDev = true;
 if(process.env.NODE_ENV === 'production'){
   isDev=false;
 }
+console.error("isDev",isDev);
 // 引入外部的配置文件 根据环境，请求名字不同，配置不同的baseurl
 host.map((item)=>{
   return { name: item.name, origin: isDev ? item.dev : item.prod };
@@ -18,7 +27,9 @@ Axios.defaults.withCredentials = true;  // 默认为false  表示跨域请求时
 const axios = Axios.create({});
 // 请求拦截器
 axios.interceptors.request.use((request) => {
+
   try {
+    console.error("request.url",request.url, request.baseURL)
     const kiwi = localStorage.getItem('kiwi');
     const token = JSON.parse(kiwi);
     // console.log("token",token);
